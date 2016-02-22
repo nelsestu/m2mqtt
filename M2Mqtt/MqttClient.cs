@@ -369,8 +369,6 @@ namespace uPLibrary.Networking.M2Mqtt
             this.Init(brokerHostName, brokerPort, secure, caCert, clientCert, sslProtocol, userCertificateValidationCallback, userCertificateSelectionCallback);
         }
 #endif
-
-#if BROKER
         /// <summary>
         /// Constructor
         /// </summary>
@@ -390,6 +388,7 @@ namespace uPLibrary.Networking.M2Mqtt
             this.ClientId = null;
             this.CleanSession = true;
 
+            this.syncEndReceiving = new AutoResetEvent(false);
             this.keepAliveEvent = new AutoResetEvent(false);
 
             // queue for handling inflight messages (publishing and acknowledge)
@@ -404,7 +403,8 @@ namespace uPLibrary.Networking.M2Mqtt
             // session
             this.session = null;
         }
-#endif
+
+        public IMqttNetworkChannel NetworkChannel { get { return channel; } set { channel = value; } }
 
         /// <summary>
         /// MqttClient initialization

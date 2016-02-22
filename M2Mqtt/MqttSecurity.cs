@@ -24,7 +24,5 @@ namespace uPLibrary.Networking.M2Mqtt
         None,
         SSLv3,
         TLSv1_0,
-        TLSv1_1,
-        TLSv1_2
     }
 }
